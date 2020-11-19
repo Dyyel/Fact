@@ -1,10 +1,15 @@
 Desarrollo de proyecto final
+
 Sistema: Facturación
+
 Materia: DESARROLLO DE SOFTWARE CON TECNOLOGIA PROPIETARIA I 
+
 Grupo: ISO605-41060-001 
+
 Profesor: JUAN PABLO VALDEZ REYES
 
 Integrantes
+
 Daniel Hernández 2019-0683
 Katherine Martínez 2019-0900
 Brayan Montaño 2019-0946
