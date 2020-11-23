@@ -80,6 +80,7 @@
             this.CbEstado.Name = "CbEstado";
             this.CbEstado.Size = new System.Drawing.Size(121, 24);
             this.CbEstado.TabIndex = 12;
+            this.CbEstado.SelectedIndexChanged += new System.EventHandler(this.CbEstado_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -134,6 +135,7 @@
             this.TxtCantidad.Name = "TxtCantidad";
             this.TxtCantidad.Size = new System.Drawing.Size(85, 22);
             this.TxtCantidad.TabIndex = 5;
+            this.TxtCantidad.TextChanged += new System.EventHandler(this.TxtCantidad_TextChanged);
             this.TxtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCantidad_KeyPress);
             // 
             // TxtDescripcion

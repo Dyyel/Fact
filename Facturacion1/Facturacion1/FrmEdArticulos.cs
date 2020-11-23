@@ -45,6 +45,7 @@ namespace Facturacion1
 
         private void FrmEdArticulos_Load(object sender, EventArgs e)
         {
+            CbEstado.SelectedIndex = 0;
             if (articulo != null)
             {
                 TxtId.Text = articulo.idArticulo.ToString();
@@ -122,6 +123,34 @@ namespace Facturacion1
             else
             {
                 e.Handled = true;
+            }
+        }
+
+        private void CbEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TxtCantidad.Text == "")
+            {
+                TxtCantidad.Text = "0";
+            }
+            if (CbEstado.Text == "Agotado")
+            {
+                TxtCantidad.Text = "0";
+                TxtCantidad.Enabled = false;
+            }
+
+            else if (CbEstado.Text == "Disponible")
+            {
+                TxtCantidad.Enabled = true;
+                TxtCantidad.Text = "1";
+            }
+            
+        }
+
+        private void TxtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            if (TxtCantidad.Text == "0")
+            {
+                CbEstado.Text = "Agotado";
             }
         }
     }

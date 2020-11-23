@@ -71,3 +71,28 @@ C:\Users\Shado\Desktop\FActs - Copy\Facturacion1\Facturacion1\obj\Debug\Facturac
 C:\Users\Shado\Desktop\FActs - Copy\Facturacion1\Facturacion1\obj\Debug\Facturacion1.csproj.CopyComplete
 C:\Users\Shado\Desktop\FActs - Copy\Facturacion1\Facturacion1\obj\Debug\Facturacion1.exe
 C:\Users\Shado\Desktop\FActs - Copy\Facturacion1\Facturacion1\obj\Debug\Facturacion1.pdb
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\bin\Debug\Facturacion1.exe.config
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\bin\Debug\Facturacion1.exe
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\bin\Debug\Facturacion1.pdb
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\bin\Debug\EntityFramework.dll
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\bin\Debug\EntityFramework.xml
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.csprojAssemblyReference.cache
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmMenuAdmin.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmArticulos.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmClientes.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmCondicionPago.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmEdArticulos.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmEdClientes.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmEdCondicionPago.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmEdVendedores.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmLogin.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmMenuUsuarios.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.FrmVendedores.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.Properties.Resources.resources
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.csproj.GenerateResource.cache
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.csproj.CoreCompileInputs.cache
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.csproj.CopyComplete
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.exe
+C:\Users\danie\OneDrive\Documents\GitHub\Fact\Facturacion1\Facturacion1\obj\Debug\Facturacion1.pdb

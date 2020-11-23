@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +16,10 @@ namespace Facturacion1
 {
     public partial class FrmCondicionPago : Form
     {
-        public CondicionPago pago { get; set; }
-        private Entities1 entities1 = new Entities1();
+        DataTable dt = new DataTable();
+        SqlConnection oCon = null;
+
+        string fileName = @"C:\prop\condicionPago.csv";
 
         public FrmCondicionPago()
         {
@@ -24,30 +28,38 @@ namespace Facturacion1
 
         private void FrmCondicionPago_Load(object sender, EventArgs e)
         {
-            ConsultarCondicionPago();
+            CbxCriterio.SelectedIndex = 0;
+            oCon = new SqlConnection("data source=.;initial catalog=Facturacion;Integrated Security=True");
+            oCon.Open();
+            ConsultarCondicionPago("");
         }
-        private void ConsultarCondicionPago()
+        private void ConsultarCondicionPago(string pFiltro)
         {
-            DgvCondicionPago.DataSource = entities1.CondicionPago.ToList();
+            string sSQL = "select * from CondicionPago ";
+            if (pFiltro.Trim().Length > 0)
+                sSQL += pFiltro;
+
+            SqlDataAdapter oDa = new SqlDataAdapter(sSQL, oCon);
+            dt = new DataTable();
+            oDa.Fill(dt);
+            DgvCondicionPago.DataSource = dt;
+            DgvCondicionPago.Refresh();
         }
-        private void consultarPorCriterio()
+        private void consultarPorCriterio(string pFiltro)
         {
-            var pago = from em in entities1.CondicionPago
-                           where (em.IdCondicionPago.ToString().StartsWith(TxtBuscador.Text) ||
-                           em.Descripcion.StartsWith(TxtBuscador.Text) ||
-                           em.Estado.StartsWith(TxtBuscador.Text)
-                           )
-                           select em;
-            DgvCondicionPago.DataSource = pago.ToList();
+            string sSQL = "select * from CondicionPago ";
+            if (pFiltro.Trim().Length > 0)
+                sSQL += pFiltro;
+
+            SqlDataAdapter oDa = new SqlDataAdapter(sSQL, oCon);
+            dt = new DataTable();
+            oDa.Fill(dt);
+            DgvCondicionPago.DataSource = dt;
+            DgvCondicionPago.Refresh();
         }
         private void FrmArticulos_Activated(object sender, EventArgs e)
         {
-            ConsultarCondicionPago();
-        }
-        private void DgvCondicionPago_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-
+            ConsultarCondicionPago("");
         }
 
         private void BtnAgregar_Click_1(object sender, EventArgs e)
@@ -58,12 +70,14 @@ namespace Facturacion1
 
         private void BtnBuscar_Click_1(object sender, EventArgs e)
         {
-            consultarPorCriterio();
+            string sWhere = "where " + CbxCriterio.SelectedItem + " like '%" + TxtBuscador.Text + "%' ";
+            sWhere += " order by " + CbxCriterio.SelectedItem;
+            consultarPorCriterio(sWhere);
         }
 
         private void FrmCondicionPago_Activated(object sender, EventArgs e)
         {
-            ConsultarCondicionPago();
+            ConsultarCondicionPago("");
         }
 
         private void DgvCondicionPago_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -88,9 +102,49 @@ namespace Facturacion1
             catch (Exception ex)
             {
 
-                return;
+                MessageBox.Show("Error al seleccionar los datos");
             }
             
+        }
+
+        private void ExportarExcel()
+        {
+            try
+            {
+                writeFileLine("sep=,");
+                writeFileLine("idCondicionPago, Descripcion, CantidadDias, Estado");
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    string linea = "";
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        linea += row[dc].ToString() + ",";
+                    }
+                    writeFileLine(linea);
+                }
+
+                Process.Start(fileName);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error al abrir el archivo");
+            }
+
+        }
+
+        private void BtnReporte_Click(object sender, EventArgs e)
+        {
+            ExportarExcel();
+        }
+
+        private void writeFileLine(string pLine)
+        {
+            using (System.IO.StreamWriter w = File.AppendText(fileName))
+            {
+                w.WriteLine(pLine);
+            }
         }
     }
 }

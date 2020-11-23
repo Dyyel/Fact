@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,63 +15,41 @@ namespace Facturacion1
 {
     public partial class FrmVendedores : Form
     {
-         
 
 
-        public vendedores vendedores { get; set; }
-        private Entities1 entities1 = new Entities1();
+
+        DataTable dt = new DataTable();
+        SqlConnection oCon = null;
+
+        string fileName = @"C:\prop\vendedores.csv";
         public FrmVendedores()
         {
             InitializeComponent();
         }
 
-        private void FrmClientes_Load(object sender, EventArgs e)
+       
+        private void ConsultarVendedores(string pFiltro)
         {
-            ConsultarArticulos();
-        }
-        private void ConsultarArticulos()
-        {
-            DgvVendedores.DataSource = entities1.vendedores.ToList();
-        }
+            string sSQL = "select * from Vendedores ";
+            if (pFiltro.Trim().Length > 0)
+                sSQL += pFiltro;
 
-        private void consultarPorCriterio()
-        {
-            var vendedores = from em in entities1.vendedores
-                           where (em.IdVendedores.ToString().StartsWith(TxtBuscador.Text) ||
-                           em.Nombre.StartsWith(TxtBuscador.Text) ||
-                           em.Estado.StartsWith(TxtBuscador.Text)
-                           )
-                           select em;
-            DgvVendedores.DataSource = vendedores.ToList();
-        }
-
-
-
-        private void FrmArticulos_Activated(object sender, EventArgs e)
-        {
-            ConsultarArticulos();
+            SqlDataAdapter oDa = new SqlDataAdapter(sSQL, oCon);
+            dt = new DataTable();
+            oDa.Fill(dt);
+            DgvVendedores.DataSource = dt;
+            DgvVendedores.Refresh();
         }
 
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-            consultarPorCriterio();
+            string sWhere = "where " + CbxCriterio.SelectedItem + " like '%" + TxtBuscador.Text + "%' ";
+            sWhere += " order by " + CbxCriterio.SelectedItem;
+            ConsultarVendedores(sWhere);
         }
 
-        private void FrmClientes_Activated(object sender, EventArgs e)
-        {
-            ConsultarArticulos();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void DgvVendedores_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -103,7 +84,55 @@ namespace Facturacion1
 
         private void FrmVendedores_Activated(object sender, EventArgs e)
         {
-            ConsultarArticulos();
+
+            ConsultarVendedores("");   
+        }
+
+        private void ExportarExcel()
+        {
+            try
+            {
+                writeFileLine("sep=,");
+                writeFileLine("idVendedores, Nombre, PorcientoComision, Estado");
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    string linea = "";
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        linea += row[dc].ToString() + ",";
+                    }
+                    writeFileLine(linea);
+                }
+
+                Process.Start(fileName);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error al abrir el archivo");
+            }
+
+        }
+        private void BtnReporte_Click(object sender, EventArgs e)
+        {
+            ExportarExcel();
+        }
+
+        private void writeFileLine(string pLine)
+        {
+            using (System.IO.StreamWriter w = File.AppendText(fileName))
+            {
+                w.WriteLine(pLine);
+            }
+        }
+
+        private void FrmVendedores_Load(object sender, EventArgs e)
+        {
+            CbxCriterio.SelectedIndex = 0;
+            oCon = new SqlConnection("data source=.;initial catalog=Facturacion;Integrated Security=True");
+            oCon.Open();
+            ConsultarVendedores("");
         }
     }
        
